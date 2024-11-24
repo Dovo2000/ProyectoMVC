@@ -29,7 +29,7 @@ namespace ProyectoMVC.DAL
                 {
                     while (reader.Read())
                     {
-                        var animal = new Animal(   
+                        Animal animal = new Animal(   
                             idAnimal: Convert.ToInt32(reader["IdAnimal"]),
                             nombreAnimal: new string(Convert.ToString(reader["NombreAnimal"])),
                             raza: Convert.IsDBNull(reader["Raza"]) ? null : reader["Raza"].ToString(),
@@ -89,14 +89,14 @@ namespace ProyectoMVC.DAL
                     string query = "INSERT INTO Animal (NombreAnimal, Raza, RIdTipoAnimal, FechaNacimiento) " +
                                     "VALUES (@NombreAnimal, @Raza, @RIdTipoAnimal, @FechaNacimiento)";
 
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@NombreAnimal", animal.NombreAnimal);
-                    command.Parameters.AddWithValue("@Raza", animal.Raza ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@RIdTipoAnimal", animal.RIdTipoAnimal);
-                    command.Parameters.AddWithValue("@FechaNacimiento", animal.FechaNacimiento ?? (object)DBNull.Value);
+                    SqlCommand cmd = new SqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@NombreAnimal", animal.NombreAnimal);
+                    cmd.Parameters.AddWithValue("@Raza", animal.Raza ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@RIdTipoAnimal", animal.RIdTipoAnimal);
+                    cmd.Parameters.AddWithValue("@FechaNacimiento", animal.FechaNacimiento ?? (object)DBNull.Value);
 
                     connection.Open();
-                    command.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
@@ -115,15 +115,15 @@ namespace ProyectoMVC.DAL
                     string query = "UPDATE Animal SET NombreAnimal = @NombreAnimal, Raza = @Raza, " +
                                     "RIdTipoAnimal = @RIdTipoAnimal, FechaNacimiento = @FechaNacimiento WHERE IdAnimal = @IdAnimal";
 
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@IdAnimal", animal.IdAnimal);
-                    command.Parameters.AddWithValue("@NombreAnimal", animal.NombreAnimal);
-                    command.Parameters.AddWithValue("@Raza", animal.Raza ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@RIdTipoAnimal", animal.RIdTipoAnimal);
-                    command.Parameters.AddWithValue("@FechaNacimiento", animal.FechaNacimiento ?? (object)DBNull.Value);
+                    SqlCommand cmd = new SqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@IdAnimal", animal.IdAnimal);
+                    cmd.Parameters.AddWithValue("@NombreAnimal", animal.NombreAnimal);
+                    cmd.Parameters.AddWithValue("@Raza", animal.Raza ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@RIdTipoAnimal", animal.RIdTipoAnimal);
+                    cmd.Parameters.AddWithValue("@FechaNacimiento", animal.FechaNacimiento ?? (object)DBNull.Value);
 
                     connection.Open();
-                    command.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)
@@ -139,11 +139,11 @@ namespace ProyectoMVC.DAL
             {
                 string query = "DELETE FROM Animal WHERE IdAnimal = @IdAnimal";
 
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@IdAnimal", id);
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@IdAnimal", id);
 
                 connection.Open();
-                command.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
             }
         }
     }
