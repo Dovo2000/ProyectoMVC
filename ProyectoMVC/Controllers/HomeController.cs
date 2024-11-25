@@ -38,5 +38,28 @@ namespace ProyectoMVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult AddAnimal(string animalName, string razaAnimal, DateTime fechaNacimientoAnimal, int idTipoAnimal)
+        {
+            AnimalViewModel viewModel = new AnimalViewModel();
+
+            AnimalDAL animalDAL = new AnimalDAL();
+            TipoAnimalDAL tipoAnimalDAL = new TipoAnimalDAL();
+            Animal animal = new Animal(animalName, razaAnimal, idTipoAnimal, fechaNacimientoAnimal, tipoAnimalDAL.GetById(idTipoAnimal) ?? new TipoAnimal());
+
+            animalDAL.Add(animal);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            AnimalViewModel viewModel = new AnimalViewModel();
+            
+            AnimalDAL animalDAL = new AnimalDAL();
+            animalDAL.Delete(id);
+
+            return RedirectToAction("Index");
+        }
     }
 }

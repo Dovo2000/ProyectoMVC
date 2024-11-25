@@ -12,11 +12,15 @@
             <ul>
                 @foreach (Animal animal in Model.Animals)
                 {
-                    <li>
+                    <li class="d-flex">
                         <form asp-area="" asp-controller="Animal" asp-action="Detail" method="get">
                             <span class="animal-id">ID: @animal.IdAnimal</span>@(animal.NombreAnimal)
                             <input type="hidden" name="id" value="@animal.IdAnimal" />
                             <button type="submit" class="btn btn-primary ms-2">Ver Detalles</button>
+                        </form>
+                        <form asp-area="" asp-controller="Home" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@animal.IdAnimal" />
+                            <button type="submit" class="btn btn-danger ms-2">Eliminar</button>
                         </form>
                     </li>
                 }
@@ -24,7 +28,7 @@
         </div>
         <div class="col-6">
             <h1>Añadir animal</h1>
-            <form class="addAnimalForm">
+            <form class="addAnimalForm" asp-area="" asp-controller="Home" asp-action="AddAnimal" method="post">
                 <div>
                     <label for="animalName">Nombre:</label>
                     <input type="text" name="animalName" id="animalName" value="" />

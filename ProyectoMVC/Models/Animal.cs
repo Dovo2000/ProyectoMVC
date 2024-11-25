@@ -21,6 +21,16 @@
             TipoAnimal = new TipoAnimal();
         }
 
+        public Animal(string nombreAnimal, string? raza, int rIdTipoAnimal, DateTime? fechaNacimiento, TipoAnimal tipoAnimal)
+        {
+            IdAnimal = 0;
+            NombreAnimal = nombreAnimal;
+            Raza = raza;
+            RIdTipoAnimal = rIdTipoAnimal;
+            FechaNacimiento = fechaNacimiento;
+            TipoAnimal = tipoAnimal;
+        }
+
         public Animal(int idAnimal, string nombreAnimal, string? raza, int rIdTipoAnimal, DateTime? fechaNacimiento, TipoAnimal tipoAnimal)
         {
             IdAnimal = idAnimal;
