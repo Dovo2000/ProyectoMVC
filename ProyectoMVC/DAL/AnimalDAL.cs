@@ -5,17 +5,19 @@ namespace ProyectoMVC.DAL
 {
     public class AnimalDAL
     {
-        private string _connectionString = "";
-        public AnimalDAL(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
+        private string _connectionString = "Data Source=85.208.21.117,54321;" +
+            "Initial Catalog=DavidAnimales;" +
+            "User ID=sa;" +
+            "Password=Sql#123456789;" +
+            "TrustServerCertificate=True;";
+
+        public AnimalDAL(){ }
 
         // Obtener todos los animales
         public List<Animal> GetAll()
         {
             var animals = new List<Animal>();
-            TipoAnimalDAL tipoAnimalDAL = new TipoAnimalDAL(_connectionString);
+            TipoAnimalDAL tipoAnimalDAL = new TipoAnimalDAL();
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {

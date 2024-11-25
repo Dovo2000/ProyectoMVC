@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProyectoMVC.Models;
 using ProyectoMVC.Models.ViewModels;
+using ProyectoMVC.DAL;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 
@@ -17,7 +18,12 @@ namespace ProyectoMVC.Controllers
 
         public IActionResult Index()
         {
+            AnimalDAL animalDAL = new AnimalDAL();
+            TipoAnimalDAL tipoAnimalDAL = new TipoAnimalDAL();
             AnimalViewModel viewModel = new AnimalViewModel();
+
+            viewModel.Animals = animalDAL.GetAll();
+            viewModel.TiposAnimales = tipoAnimalDAL.GetAll();
 
             return View(viewModel);
         }

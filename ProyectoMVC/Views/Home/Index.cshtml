@@ -1,8 +1,57 @@
-﻿@{
+﻿@using ProyectoMVC.Models.ViewModels
+@model AnimalViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div id="index" class="container">
+    <div class="row">
+        <div id="animalList" class="col-6">
+            <h1>Lista de Animales</h1>
+            <ul>
+                @foreach (Animal animal in Model.Animals)
+                {
+                    <li>
+                        <form asp-area="" asp-controller="Animal" asp-action="Detail" method="get">
+                            <span class="animal-id">ID: @animal.IdAnimal</span>@(animal.NombreAnimal)
+                            <input type="hidden" name="id" value="@animal.IdAnimal" />
+                            <button type="submit" class="btn btn-primary ms-2">Ver Detalles</button>
+                        </form>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-6">
+            <h1>Añadir animal</h1>
+            <form class="addAnimalForm">
+                <div>
+                    <label for="animalName">Nombre:</label>
+                    <input type="text" name="animalName" id="animalName" value="" />
+                </div>
+                <div>
+                    <label for="razaAnimal">Raza:</label>
+                    <input type="text" name="razaAnimal" id="razaAnimal" value="" />
+                </div>
+                <div>
+                    <label for="fechaNacimientoAnimal">Fecha de nacimiento:</label>
+                    <input type="datetime-local" name="fechaNacimientoAnimal" id="fechaNacimientoAnimal" value="" />
+                </div>
+
+                <div class="col-lg-6">
+                    <select id="listTipo" name="idTipoAnimal" class="form-select" aria-label="Default select example">
+                        <option selected>Selecciona el tipo de animal</option>
+                        @foreach (TipoAnimal tipo in Model.TiposAnimales)
+                        {
+                            <option value="@tipo.IdTipoAnimal">@tipo.TipoDescripcion</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Añadir</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

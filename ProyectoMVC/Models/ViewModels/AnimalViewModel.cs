@@ -2,23 +2,13 @@
 {
     public class AnimalViewModel
     {
-        public List<string> Animals { get; set; } = new List<string>();
+        public List<Animal> Animals { get; set; }
+        public List<TipoAnimal> TiposAnimales { get; set; }
 
         public AnimalViewModel() 
         {
-            Animals = new List<string>
-            {
-                "Elefante",
-                "Tigre",
-                "León",
-                "Jirafa",
-                "Rinoceronte",
-                "Oso Panda",
-                "Koala",
-                "Cephalopodo",
-                "Canguro",
-                "Águila"
-            };
+            Animals = new List<Animal>();
+            TiposAnimales = new List<TipoAnimal>();
         }
     }
 }

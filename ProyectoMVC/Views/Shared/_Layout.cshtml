@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es-es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ProyectoMVC.styles.css" asp-append-version="true" />
     <style>
-        body {
+        #index {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
 
-        body > ul {
+        #animalList ul {
             list-style-type: none;
             padding: 0;
 
@@ -29,6 +29,10 @@
         .animal-id {
             font-weight: bold;
             margin-right: 10px;
+        }
+
+        .addAnimalForm div{
+            margin: 1em;
         }
     </style>
 </head>
@@ -60,17 +64,7 @@
             @RenderBody()
         </main>
     </div>
-    @using ProyectoMVC.Models.ViewModels
-    @model AnimalViewModel
-
-    <h1>Lista de Animales</h1>
-    <ul>
-        @for(int i = 0; i < Model.Animals.Count; i++)
-        {
-            <li><span class="animal-id">ID: @(i + 1)</span>@Model.Animals[i]</li>
-        }
-    </ul>
-
+    
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - ProyectoMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
