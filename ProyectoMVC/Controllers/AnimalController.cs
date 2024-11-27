@@ -1,18 +1,36 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using ProyectoMVC.DAL;
 using ProyectoMVC.Models;
 using ProyectoMVC.Models.ViewModels;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Windows.Markup;
 
 namespace ProyectoMVC.Controllers
 {
     public class AnimalController : Controller
     {
-        public IActionResult Index()
+        [HttpGet]
+        public ActionResult Crear()
         {
+            TipoAnimalDAL dal = new TipoAnimalDAL();
+
+            List<TipoAnimal> tiposDeAnimal = dal.GetAll();
+
+            ViewBag.TiposDeAnimal = tiposDeAnimal.Select(t => new SelectListItem
+            {
+                Value = t.IdTipoAnimal.ToString(),
+                Text = t.TipoDescripcion
+            });
+
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Crear(CrearAnimalViewModel model)
+        {
+            return View(model);
         }
 
         [HttpGet]
@@ -26,7 +44,7 @@ namespace ProyectoMVC.Controllers
                 return View(vm);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Lista", "Home");
         }
 
         [HttpPost]

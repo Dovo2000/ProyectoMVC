@@ -60,7 +60,7 @@ namespace ProyectoMVC.Controllers
                 animalDAL.Update(animal);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Lista");
         }
 
         [HttpPost]
@@ -71,7 +71,7 @@ namespace ProyectoMVC.Controllers
             AnimalDAL animalDAL = new AnimalDAL();
             animalDAL.Delete(id);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Lista");
         }
     }
 }

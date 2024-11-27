@@ -1,0 +1,44 @@
+﻿@model ProyectoMVC.Models.ViewModels.CrearAnimalViewModel
+
+@{
+    ViewData["Title"] = "Crear Animal";
+}
+
+<h1>Añadir animal</h1>
+<div class="container">
+    <form id="animalDataForm" class="addAnimalForm" asp-controller="Animal" asp-action="Crear" method="post">
+        <div class="mb-1">
+            <label asp-for="NombreAnimal" class="form-label"></label>
+            <input asp-for="NombreAnimal" class="form-control" />
+            <span asp-validation-for="NombreAnimal" class="text-danger"></span>
+        </div>
+        <div class="mb-1">
+            <label asp-for="Raza" class="form-label"></label>
+            <input asp-for="Raza" class="form-control" />
+            <span asp-validation-for="Raza" class="text-danger"></span>
+        </div>
+        <div class="mb-1">
+            <label asp-for="RIdTipoAnimal" class="form-label"></label>
+            <select asp-for="RIdTipoAnimal" class="form-control" asp-items="ViewBag.TiposDeAnimal">
+                <option value="">Seleccione un tipo de animal</option>
+            </select>
+            <span asp-validation-for="RIdTipoAnimal" class="text-danger"></span>
+        </div>
+
+        <div class="mb-1">
+            <label asp-for="FechaNacimiento" class="form-label"></label>
+            <input asp-for="FechaNacimiento" class="form-control" type="date"/>
+            <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+        </div>
+
+        <div class="mb-1">
+            <button type="submit" form="animalDataForm" class="btn btn-primary" name="submitAction">Añadir</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

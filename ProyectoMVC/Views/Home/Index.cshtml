@@ -7,7 +7,7 @@
 
 <div id="index" class="container">
     <div class="row">
-        <div id="animalList" class="col-6">
+        <div id="animalList">
             <h1>Lista de Animales</h1>
             <ul>
                 @foreach (Animal animal in Model.Animals)
@@ -26,37 +26,6 @@
                     </li>
                 }
             </ul>
-        </div>
-        <div class="col-6">
-            <h1>Añadir animal</h1>
-            <form id="animalDataForm" class="addAnimalForm" asp-area="" asp-controller="Home" asp-action="UpdateList" method="post">
-                <div>
-                    <label for="animalName">Nombre:</label>
-                    <input type="text" name="animalName" id="animalName" value="" />
-                </div>
-                <div>
-                    <label for="razaAnimal">Raza:</label>
-                    <input type="text" name="razaAnimal" id="razaAnimal" value="" />
-                </div>
-                <div>
-                    <label for="fechaNacimientoAnimal">Fecha de nacimiento:</label>
-                    <input type="datetime-local" name="fechaNacimientoAnimal" id="fechaNacimientoAnimal" value="" />
-                </div>
-
-                <div class="col-lg-6">
-                    <select id="listTipo" name="idTipoAnimal" class="form-select" aria-label="Default select example">
-                        <option selected>Selecciona el tipo de animal</option>
-                        @foreach (TipoAnimal tipo in Model.TiposAnimales)
-                        {
-                            <option value="@tipo.IdTipoAnimal">@tipo.TipoDescripcion</option>
-                        }
-                    </select>
-                </div>
-
-                <div class="d-flex justify-content-center gap-2">
-                    <button type="submit" form="animalDataForm" class="btn btn-primary" name="submitAction">Añadir</button>
-                </div>
-            </form>
         </div>
     </div>
 </div>
