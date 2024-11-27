@@ -3,8 +3,6 @@ using ProyectoMVC.Models;
 using ProyectoMVC.Models.ViewModels;
 using ProyectoMVC.DAL;
 using System.Diagnostics;
-using System.Net.NetworkInformation;
-using System.Reflection.Metadata;
 
 namespace ProyectoMVC.Controllers
 {
@@ -51,7 +49,7 @@ namespace ProyectoMVC.Controllers
             {
                 Animal animal = new Animal(animalName, razaAnimal, idTipoAnimal, fechaNacimientoAnimal, tipoAnimalDAL.GetById(idTipoAnimal) ?? new TipoAnimal());
 
-                animalDAL.Add(animal);
+                animalDAL.Insert(animal);
             }
             else
             {
@@ -60,7 +58,7 @@ namespace ProyectoMVC.Controllers
                 animalDAL.Update(animal);
             }
 
-            return RedirectToAction("Lista");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -71,7 +69,7 @@ namespace ProyectoMVC.Controllers
             AnimalDAL animalDAL = new AnimalDAL();
             animalDAL.Delete(id);
 
-            return RedirectToAction("Lista");
+            return RedirectToAction("Index");
         }
     }
 }

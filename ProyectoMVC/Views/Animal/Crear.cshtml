@@ -2,11 +2,26 @@
 
 @{
     ViewData["Title"] = "Crear Animal";
+    var successMessage = TempData["Success"] as string;
+}
+
+@if(!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success" role="alert">
+        @successMessage
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <div class="alert alert-error" role="alert">
+        @ViewBag.Error
+    </div>
 }
 
 <h1>Añadir animal</h1>
 <div class="container">
-    <form id="animalDataForm" class="addAnimalForm" asp-controller="Animal" asp-action="Crear" method="post">
+    <form id="animalDataForm" asp-controller="Animal" asp-action="Crear" method="post" asp-antiforgery="true">
         <div class="mb-1">
             <label asp-for="NombreAnimal" class="form-label"></label>
             <input asp-for="NombreAnimal" class="form-control" />
@@ -19,7 +34,7 @@
         </div>
         <div class="mb-1">
             <label asp-for="RIdTipoAnimal" class="form-label"></label>
-            <select asp-for="RIdTipoAnimal" class="form-control" asp-items="ViewBag.TiposDeAnimal">
+            <select asp-for="RIdTipoAnimal" class="form-control" asp-items="ViewBag.TiposAnimales">
                 <option value="">Seleccione un tipo de animal</option>
             </select>
             <span asp-validation-for="RIdTipoAnimal" class="text-danger"></span>

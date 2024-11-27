@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using ProyectoMVC.DAL;
 using ProyectoMVC.Models;
 using ProyectoMVC.Models.ViewModels;
-using System.Windows.Markup;
 
 namespace ProyectoMVC.Controllers
 {
@@ -17,7 +16,7 @@ namespace ProyectoMVC.Controllers
 
             List<TipoAnimal> tiposDeAnimal = dal.GetAll();
 
-            ViewBag.TiposDeAnimal = tiposDeAnimal.Select(t => new SelectListItem
+            ViewBag.TiposAnimales = tiposDeAnimal.Select(t => new SelectListItem
             {
                 Value = t.IdTipoAnimal.ToString(),
                 Text = t.TipoDescripcion
@@ -30,6 +29,34 @@ namespace ProyectoMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Crear(CrearAnimalViewModel model)
         {
+            if(ModelState.IsValid)
+            {
+                AnimalDAL animalDAL = new AnimalDAL();
+                Animal animal = new Animal();
+
+                animal.NombreAnimal = model.NombreAnimal;
+                animal.RIdTipoAnimal = model.RIdTipoAnimal;
+                animal.Raza = model.Raza;
+                animal.FechaNacimiento = model.FechaNacimiento;
+
+                animalDAL.Insert(animal);
+
+                TempData["Success"] = "Se ha creado el animal.";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            TipoAnimalDAL dal = new TipoAnimalDAL();
+            List<TipoAnimal> tiposAnimales = new List<TipoAnimal>();
+
+            ViewBag.TiposAnimales = tiposAnimales.Select(t => new SelectListItem
+            {
+                Value = t.IdTipoAnimal.ToString(),
+                Text = t.TipoDescripcion
+            });
+
+            ViewBag.Error = "No se ha podido crear el animal";
+
             return View(model);
         }
 

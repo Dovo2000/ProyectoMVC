@@ -82,7 +82,7 @@ namespace ProyectoMVC.DAL
         }
 
         // Insertar un nuevo animal
-        public void Add(Animal animal)
+        public void Insert(Animal animal)
         {
             try
             {
