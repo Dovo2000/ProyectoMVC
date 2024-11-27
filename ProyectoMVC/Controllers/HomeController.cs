@@ -40,47 +40,36 @@ namespace ProyectoMVC.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult UpdateList(string animalName, string razaAnimal, DateTime fechaNacimientoAnimal, int idTipoAnimal, string submitAction)
+        [HttpPost]
+        public IActionResult UpdateList(string animalName, string razaAnimal, DateTime fechaNacimientoAnimal, int idTipoAnimal, int? id)
         {
             AnimalViewModel viewModel = new AnimalViewModel();
             AnimalDAL animalDAL = new AnimalDAL();
             TipoAnimalDAL tipoAnimalDAL = new TipoAnimalDAL();
 
-            if(submitAction == "Add")
+            if (id == null)
             {
                 Animal animal = new Animal(animalName, razaAnimal, idTipoAnimal, fechaNacimientoAnimal, tipoAnimalDAL.GetById(idTipoAnimal) ?? new TipoAnimal());
 
                 animalDAL.Add(animal);
             }
-            else if (submitAction == "Update")
+            else
             {
-                if (ViewData["UpdateTarget"] != null)
-                {
-                    Animal animal = new Animal(Convert.ToInt32(ViewData["UpdateTarget"]), animalName, razaAnimal, idTipoAnimal, fechaNacimientoAnimal, tipoAnimalDAL.GetById(idTipoAnimal) ?? new TipoAnimal());
-                
-                    animalDAL.Update(animal);
-                }
+                Animal animal = new Animal((int) id, animalName, razaAnimal, idTipoAnimal, fechaNacimientoAnimal, tipoAnimalDAL.GetById(idTipoAnimal) ?? new TipoAnimal());
+
+                animalDAL.Update(animal);
             }
 
-            ViewData["UpdateTarget"] = null;
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             AnimalViewModel viewModel = new AnimalViewModel();
             
             AnimalDAL animalDAL = new AnimalDAL();
             animalDAL.Delete(id);
-
-            ViewData["UpdateTarget"] = null;
-
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult ChangeTarget(int id)
-        {
-            ViewData["UpdateTarget"] = id;
 
             return RedirectToAction("Index");
         }

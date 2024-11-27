@@ -2,13 +2,23 @@
 
 @{
     ViewData["Title"] = "Details";
+    var errorMessage = ViewBag.NoAnimal as string;
 }
 
-<div>
-    <h2>Detalles del animal</h2>
-    <p>ID: @Model.AnimalDetail.IdAnimal</p>
-    <p>Nombre: @Model.AnimalDetail.NombreAnimal</p>
-    <p>Raza: @Model.AnimalDetail.Raza</p>
-    <p>Tipo de animal: @Model.AnimalDetail.TipoAnimal.TipoDescripcion</p>
-    <p>Fecha de nacimiento: @Model.AnimalDetail.FechaNacimiento.ToString()</p>
-</div>
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @errorMessage
+    </div>
+}
+else
+{
+    <div>
+        <h2>Detalles del animal</h2>
+        <p>ID: @Model.AnimalDetail.IdAnimal</p>
+        <p>Nombre: @Model.AnimalDetail.NombreAnimal</p>
+        <p>Raza: @Model.AnimalDetail.Raza</p>
+        <p>Tipo de animal: @Model.AnimalDetail.TipoAnimal.TipoDescripcion</p>
+        <p>Fecha de nacimiento: @Model.AnimalDetail.FechaNacimiento.ToString()</p>
+    </div>
+}

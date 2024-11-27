@@ -4,14 +4,15 @@ namespace ProyectoMVC.Models.ViewModels
 {
     public class DetailAnimalViewModel
     {
-        public Animal AnimalDetail { get; set; } = new Animal();
-
-        public DetailAnimalViewModel(int id)
+        public Animal AnimalDetail
         {
-            AnimalDAL animalDAL = new AnimalDAL();
-            TipoAnimalDAL tipoAnimalDAL = new TipoAnimalDAL();
-            AnimalDetail = animalDAL.GetById(id) ?? new Animal();
-            AnimalDetail.TipoAnimal = tipoAnimalDAL.GetById(AnimalDetail.RIdTipoAnimal) ?? new TipoAnimal();
+            get;
+            set;
+        }
+
+        public DetailAnimalViewModel()
+        {
+            
         }
     }
 }
