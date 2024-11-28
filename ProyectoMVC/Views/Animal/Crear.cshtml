@@ -2,14 +2,6 @@
 
 @{
     ViewData["Title"] = "Crear Animal";
-    var successMessage = TempData["Success"] as string;
-}
-
-@if(!string.IsNullOrEmpty(successMessage))
-{
-    <div class="alert alert-success" role="alert">
-        @successMessage
-    </div>
 }
 
 @if (!string.IsNullOrEmpty(ViewBag.Error))
